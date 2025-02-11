@@ -46,7 +46,7 @@ public class GamesService {
     
     public JsonObject getGamesByRank(int limit, int offset) {
 
-        List<JsonObject> gameSummaries = gamesRepo.getGamesByName(limit, offset);
+        List<JsonObject> gameSummaries = gamesRepo.getGamesByRank(limit, offset);
         
         JsonObjectBuilder objBuilder = Json.createObjectBuilder();
 

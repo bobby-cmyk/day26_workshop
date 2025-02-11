@@ -31,7 +31,7 @@ public class GamesController {
         @RequestParam(name="limit", defaultValue="25") int limit,
         @RequestParam(name="offset", defaultValue="0") int offset) 
     {
-        JsonObject respObj = gamesSvc.getGamesByName(limit, offset);
+        JsonObject respObj = gamesSvc.getGamesByRank(limit, offset);
 
         return ResponseEntity.ok().body(respObj.toString());
     }
