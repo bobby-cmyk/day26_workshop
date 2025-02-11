@@ -3,6 +3,7 @@ package vttp.batch5.groupb.day26_workshop.services;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,5 +68,9 @@ public class GamesService {
         objBuilder.add("games", arrBuilder.build());
 
         return objBuilder.build();
+    }
+
+    public Optional<JsonObject> getGameById(String gameId) {
+        return gamesRepo.getGameById(gameId);
     }
 }
