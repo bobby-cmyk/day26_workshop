@@ -25,4 +25,14 @@ public class GamesController {
 
         return ResponseEntity.ok().body(respObj.toString());
     }
+
+    @GetMapping(path="/games/rank", produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getGamesByRank(
+        @RequestParam(name="limit", defaultValue="25") int limit,
+        @RequestParam(name="offset", defaultValue="0") int offset) 
+    {
+        JsonObject respObj = gamesSvc.getGamesByName(limit, offset);
+
+        return ResponseEntity.ok().body(respObj.toString());
+    }
 }

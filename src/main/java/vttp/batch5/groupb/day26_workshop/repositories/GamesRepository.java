@@ -56,4 +56,42 @@ public class GamesRepository {
 
         return gameSummaries;
     }
+
+    /*
+     * db.games.find({})
+        .sort({ranking : 1})
+        .limit(25)
+        .skip(0)
+        .projection({_id:0, gid:1, name:1})
+     * 
+     */
+
+     public List<JsonObject> getGamesByRank(int limit, int offset) {
+
+        Query query = new Query();
+
+        Sort sortbyName = Sort.by(Sort.Direction.ASC, "ranking");
+
+        query.with(sortbyName);
+        
+        query.limit(limit).skip(offset);
+
+        query.fields()
+            .include("name");
+
+        List<Document> results = mongoTemplate.find(query, Document.class, "games");
+
+        List<JsonObject> gameSummaries = new ArrayList<>();
+
+        for (Document doc : results) {
+            JsonObjectBuilder objBuilder = Json.createObjectBuilder();
+
+            objBuilder.add("game_id", doc.getObjectId("_id").toString());
+            objBuilder.add("name", doc.getString("name"));
+
+            gameSummaries.add(objBuilder.build());
+        }
+
+        return gameSummaries;
+    }
 }
